@@ -21,6 +21,9 @@ public class Member extends BaseTimeEntity {
     private Role role;
 
     @Column(nullable = false)
+    private String email;
+
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
@@ -28,7 +31,8 @@ public class Member extends BaseTimeEntity {
 
     //-비즈니스 로직-//
     @Builder
-    public Member(Role role, String password, String nickname) {
+    public Member(Role role, String email, String password, String nickname) {
+        this.email = email;
         this.role = role;
         this.password = password;
         this.nickname = nickname;

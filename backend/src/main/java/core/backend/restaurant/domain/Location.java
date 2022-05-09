@@ -1,6 +1,7 @@
 package core.backend.restaurant.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,4 +17,10 @@ public class Location {
 
     @Column(nullable = false)
     private double longitude;
+
+    @Builder
+    public Location(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
