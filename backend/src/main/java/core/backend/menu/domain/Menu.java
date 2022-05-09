@@ -41,9 +41,10 @@ public class Menu extends BaseTimeEntity {
 
     //-비즈니스 로직-//
     @Builder
-    public Menu(String name, String content, int price) {
+    public Menu(String name, String content, int price, Restaurant restaurant) {
         this.name = name;
         this.content = content;
         this.price = price;
+        setRestaurant(restaurant);
     }
 }

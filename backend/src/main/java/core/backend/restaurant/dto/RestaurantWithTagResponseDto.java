@@ -4,11 +4,13 @@ import core.backend.menu.dto.MenuResponseDto;
 import core.backend.restaurant.domain.Location;
 import core.backend.restaurant.domain.Restaurant;
 import core.backend.tag.dto.TagResponseDto;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
 public class RestaurantWithTagResponseDto {
     private Long id;
     private String name;
