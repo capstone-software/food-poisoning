@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class tag extends BaseTimeEntity {
+public class Tag extends BaseTimeEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -24,7 +24,7 @@ public class tag extends BaseTimeEntity {
 
     //-비즈니스 로직-//
     @Builder
-    public tag(String name) {
+    public Tag(String name) {
         this.name = name;
     }
 }
