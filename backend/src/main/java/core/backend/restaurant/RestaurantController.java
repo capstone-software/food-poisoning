@@ -5,7 +5,11 @@ import core.backend.restaurant.domain.Restaurant;
 import core.backend.restaurant.dto.RestaurantInfoResponseDto;
 import core.backend.restaurant.dto.RestaurantResponseDto;
 import core.backend.restaurant.dto.RestaurantSaveRequestDto;
+import core.backend.restaurant.dto.RestaurantWithTagResponseDto;
 import core.backend.restaurant.service.RestaurantService;
+import core.backend.restaurantTag.service.RestaurantTagService;
+import core.backend.tag.dto.TagResponseDto;
+import core.backend.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,12 +29,18 @@ import static org.springframework.http.HttpStatus.OK;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final RestaurantTagService restaurantTagService;
+    private final TagService tagService;
 
     @GetMapping("/restaurant/{id}")
-    public ResponseEntity<RestaurantResponseDto> findByIdV1(
-            @PathVariable Long id) {
+    public ResponseEntity<RestaurantWithTagResponseDto> findByIdV1(
+            @PathVariable Long id,
+            @PageableDefault Pageable pageable) {
         Restaurant restaurant = restaurantService.findByIdOrThrow(id);
-        return ResponseEntity.ok(new RestaurantResponseDto(restaurant));
+        List<TagResponseDto> tagResponseList = restaurantTagService.findByRestaurantId(id, pageable).stream()
+                .map(item -> new TagResponseDto(tagService.findByIdOrThrow(item.getTagId())))
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(new RestaurantWithTagResponseDto(restaurant, tagResponseList));
     }
 
     @GetMapping("/restaurants")
