@@ -35,4 +35,8 @@ public class RestaurantTagService {
     public Page<RestaurantTag> findAll(Pageable pageable) {
         return restaurantTagRepository.findAll(pageable);
     }
+
+    public Page<RestaurantTag> findByRestaurantId(Long restaurantId, Pageable pageable) {
+        return restaurantTagRepository.findByRestaurantId(restaurantId, pageable);
+    }
 }
