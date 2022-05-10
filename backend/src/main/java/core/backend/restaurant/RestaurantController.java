@@ -2,15 +2,13 @@ package core.backend.restaurant;
 
 import core.backend.global.dto.DataResponse;
 import core.backend.restaurant.domain.Restaurant;
-import core.backend.restaurant.dto.RestaurantInfoResponseDto;
-import core.backend.restaurant.dto.RestaurantResponseDto;
-import core.backend.restaurant.dto.RestaurantSaveRequestDto;
-import core.backend.restaurant.dto.RestaurantWithTagResponseDto;
+import core.backend.restaurant.dto.*;
 import core.backend.restaurant.service.RestaurantService;
 import core.backend.restaurantTag.service.RestaurantTagService;
 import core.backend.tag.dto.TagResponseDto;
 import core.backend.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -48,6 +46,19 @@ public class RestaurantController {
             @PageableDefault Pageable pageable) {
         List<RestaurantResponseDto> result = restaurantService.findAll(pageable).stream()
                 .map(RestaurantResponseDto::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(DataResponse.builder().count(result.size()).data(result).build());
+    }
+
+    @GetMapping("/restaurant/search")
+    public ResponseEntity<DataResponse> searchV1(
+            @RequestParam(defaultValue = "") String name,
+            @RequestParam(defaultValue = "") String description,
+            @PageableDefault Pageable pageable) {
+        List<RestaurantInfoResponseDto> result = restaurantService.search(
+                        new RestaurantSearchCondition(name, description),
+                        pageable).stream()
+                .map(RestaurantInfoResponseDto::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(DataResponse.builder().count(result.size()).data(result).build());
     }

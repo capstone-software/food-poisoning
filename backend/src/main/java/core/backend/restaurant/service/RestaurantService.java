@@ -5,6 +5,7 @@ import core.backend.restaurant.dto.RestaurantSearchCondition;
 import core.backend.restaurant.exception.RestaurantNotFoundException;
 import core.backend.restaurant.repository.RestaurantRepository;
 import core.backend.restaurant.repository.RestaurantSearchRepository;
+import core.backend.restaurant.repository.RestaurantSearchRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
