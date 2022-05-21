@@ -1,5 +1,6 @@
 package core.backend.flask;
 
+import core.backend.flask.dto.ModelDataRequestDto;
 import core.backend.flask.dto.ModelResultRequestDto;
 import core.backend.flask.dto.ModelResultResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -29,10 +30,11 @@ public class FlaskController {
             @RequestBody ModelResultRequestDto dto) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        ModelDataRequestDto requestDto = new ModelDataRequestDto(dto.toList());
 
         ModelResultResponseDto result = restTemplate.postForObject(
                 url + "/model-predict",
-                new HttpEntity<>(dto, headers),
+                new HttpEntity<>(requestDto, headers),
                 ModelResultResponseDto.class);
         return ResponseEntity.ok(result);
     }
