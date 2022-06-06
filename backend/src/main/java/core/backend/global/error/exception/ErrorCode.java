@@ -1,8 +1,8 @@
 package core.backend.global.error.exception;
 
-import core.backend.menu.exception.MenuNotFoundException;
+import core.backend.shop.menu.exception.MenuNotFoundException;
 import core.backend.myRestaurant.exception.MyRestaurantNotFoundException;
-import core.backend.restaurant.exception.RestaurantNotFoundException;
+import core.backend.shop.restaurant.exception.RestaurantNotFoundException;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
