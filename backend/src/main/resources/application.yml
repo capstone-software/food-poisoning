@@ -16,8 +16,11 @@ spring:
   servlet:
     multipart:
       enabled: true
-  jwt:
-    secret: "y=6uh6#!^$_z0ih@to&c5_wpnf?7lw+k9b)rca!ief2iu2v(0"
+jwt:
+  secret: "y=6uh6#!^$_z0ih@to&c5_wpnf?7lw+k9b)rca!ief2iu2v(0"
+
+elastic:
+  host: "127.0.0.1:9200,127.0.0.2:9200"
 
 flask:
   url: "http://2a6d-34-125-88-226.ngrok.io"
@@ -27,3 +30,5 @@ logging:
     org.hibernate.SQL: debug
     org.springframework: debug
     org.springframework.web: debug
+    org.springframework.data.elasticsearch.client.WIRE: TRACE
+

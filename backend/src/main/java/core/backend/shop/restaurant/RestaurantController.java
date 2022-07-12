@@ -52,8 +52,8 @@ public class RestaurantController {
             @RequestParam(defaultValue = "") String description,
             @PageableDefault Pageable pageable) {
         List<RestaurantInfoResponseDto> result = restaurantService.search(
-                        new RestaurantSearchCondition(name, description),
-                        pageable).stream()
+                        new RestaurantSearchCondition(name, description), pageable)
+                .stream()
                 .map(RestaurantInfoResponseDto::new)
                 .collect(Collectors.toList());
         return ResponseEntity.ok(DataResponse.builder().count(result.size()).data(result).build());

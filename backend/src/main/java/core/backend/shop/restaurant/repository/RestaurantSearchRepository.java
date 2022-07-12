@@ -6,5 +6,5 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface RestaurantSearchRepository {
-    Page<Restaurant> search(RestaurantSearchCondition condition, Pageable pageable);
+    Page<Restaurant> searchBy(RestaurantSearchCondition condition, Pageable pageable);
 }

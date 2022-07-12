@@ -1,10 +1,12 @@
 package core.backend.shop.restaurant.service;
 
+import core.backend.elastic.repository.ElasticsearchRestaurantRepository;
 import core.backend.shop.restaurant.domain.Restaurant;
 import core.backend.shop.restaurant.dto.RestaurantSearchCondition;
 import core.backend.shop.restaurant.exception.RestaurantNotFoundException;
 import core.backend.shop.restaurant.repository.RestaurantRepository;
 import core.backend.shop.restaurant.repository.RestaurantSearchRepository;
+import core.backend.shop.restaurant.repository.RestaurantSearchRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
-    private final RestaurantSearchRepository restaurantSearchRepository;
+    private final ElasticsearchRestaurantRepository restaurantSearchRepository;
 
     @Transactional
     public Long save(Restaurant restaurant) {
@@ -40,6 +42,6 @@ public class RestaurantService {
     }
 
     public Page<Restaurant> search(RestaurantSearchCondition condition, Pageable pageable) {
-        return restaurantSearchRepository.search(condition, pageable);
+        return restaurantSearchRepository.searchBy(condition, pageable);
     }
 }
